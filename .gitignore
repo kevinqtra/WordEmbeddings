@@ -1,0 +1,4 @@
+.DS_Store
+src/.DS_Store
+src/.vscode/
+src/GoogleNews-vectors-negative300.bin.gz

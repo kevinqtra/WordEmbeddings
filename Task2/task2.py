@@ -44,7 +44,7 @@ file_path = './dataset/synonym.txt'
 dataset = read_dataset(file_path)
 
 
-model_list = ["glove-wiki-gigaword-300", "glove-twitter-50", "glove-twitter-25"]
+model_list = ["glove-wiki-gigaword-300", "fasttext-wiki-news-subwords-300", "glove-twitter-100", "glove-twitter-25"]
 
 for m in model_list:
 

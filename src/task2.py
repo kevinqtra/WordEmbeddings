@@ -61,7 +61,7 @@ for m in model_list:
     # Output file analysis
     analysis_file_path = 'analysis.csv'
 
-    with open(details_file_path, 'w', newline='') as csvfile:
+    with open(details_file_path, 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
 
         # Loop through the entire dataset and find the closest synonym for each question word

@@ -48,7 +48,8 @@ def preprocess_text(text):
     return sentences
 
 for book in books:
-    with open(book, 'r', encoding='utf-8') as file:
+    path = './books/' + book
+    with open(path, 'r', encoding='utf-8') as file:
         book_text = file.read()
         preprocessed_books[book] = preprocess_text(book_text)
         
@@ -100,7 +101,7 @@ def evaluate_model(model, test_data):
 
 # Parse the Synonym Test data from the text file
 test_data = []
-with open('synonym.txt', 'r') as file:
+with open('./dataset/synonym.txt', 'r') as file:
     lines = [line.strip() for line in file if line.strip()]  # Remove empty lines and strip whitespace
     i = 0  # Initialize a counter to keep track of the line number
     while i < len(lines):
@@ -147,9 +148,6 @@ for window in window_sizes:
         # Append the results to the analysis.csv file
         with open('analysis.csv', 'a', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
-            if first_model:  # Write header only for the first model
-                writer.writerow(['Model Name', 'Vocabulary Size', 'Correct Labels (C)', 'Questions Answered Without Guessing (V)', 'Accuracy'])
-                first_model = False
             writer.writerow([model_file_name, len(model.wv), correct_labels, questions_without_guess, accuracy])
 
 # Create a list to store the performance data of each model

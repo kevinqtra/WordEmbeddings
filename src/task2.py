@@ -1,6 +1,7 @@
 import csv
 import gensim.downloader as api
 from gensim.models import KeyedVectors
+import matplotlib.pyplot as plt
 
 
 # Function to read the dataset from a txt file and store it in a dictionary
@@ -46,6 +47,9 @@ dataset = read_dataset(file_path)
 
 model_list = ["glove-wiki-gigaword-300", "fasttext-wiki-news-subwords-300", "glove-twitter-100", "glove-twitter-25"]
 
+model_names = []
+accuracies = []
+
 for m in model_list:
 
 
@@ -88,8 +92,22 @@ for m in model_list:
     # Calculate accuracy
     accuracy = correct_labels / questions_without_guessing if questions_without_guessing > 0 else 0
 
+    model_names.append(m)
+    accuracies.append(accuracy)
+
     with open(analysis_file_path, 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
 
         # Write analysis details
         writer.writerow([f"{m}", vocab_size, correct_labels, questions_without_guessing, accuracy])
+
+plt.figure(figsize=(10, 6))
+plt.plot(model_names, accuracies, marker='o', color='orange', linestyle='-', linewidth=2, markersize=8)
+plt.title('Model Accuracies')
+plt.xlabel('Model')
+plt.ylabel('Accuracy')
+plt.ylim(0, 1) 
+plt.xticks(rotation=45)  
+plt.tight_layout()
+plt.savefig('model_accuracies.png') 
+plt.show()  
